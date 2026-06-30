@@ -949,3 +949,62 @@ a {
 .hidden {
   display: none;
 }
+
+
+
+
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--foreground);
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), transform 0.15s;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.theme-toggle:active {
+  transform: translateY(0);
+}
+
+.theme-toggle__icon {
+  width: 19px;
+  height: 19px;
+}
+
+/* Show sun in dark mode (to switch to light), moon in light mode (to switch to dark) */
+.theme-toggle__icon--moon {
+  display: block;
+}
+
+.theme-toggle__icon--sun {
+  display: none;
+}
+
+.dark .theme-toggle__icon--moon {
+  display: none;
+}
+
+.dark .theme-toggle__icon--sun {
+  display: block;
+}
+
+@media (max-width: 800px) {
+  .theme-toggle {
+    position: absolute;
+    right: 64px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
