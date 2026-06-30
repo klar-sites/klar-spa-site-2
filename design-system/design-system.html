@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    /* Documentation chrome ONLY — not part of the design system */
+    .ds-page { padding-top: 3rem; padding-bottom: 6rem; display: flex; flex-direction: column; gap: 4rem; }
+    .ds-block { display: flex; flex-direction: column; gap: 1.5rem; }
+    .ds-block h2 { font-size: 1.875rem; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+    .ds-note { color: var(--muted-foreground); font-size: 0.875rem; }
+    .ds-subhead { font-size: 1.25rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; }
+    
+    .ds-specimens { 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 1rem; 
+      align-items: flex-start;
+      padding: 1.5rem;
+      background-color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+    }
+    .ds-specimens--grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+    .ds-specimens--stack { display: flex; flex-direction: column; gap: 2rem; background-color: transparent; border: none; padding: 0; }
+    .ds-specimens > * { flex: 0 0 auto; }
+
+    .ds-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem; }
+    .ds-swatch { border: 1px solid var(--border); border-radius: 0.5rem; overflow: hidden; font-size: 0.875rem; }
+    .ds-swatch__color { height: 80px; }
+    .ds-swatch__label { padding: 0.5rem; background: var(--card); color: var(--card-foreground); }
+
+    .ds-type-row { display: flex; flex-direction: column; gap: 0.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+    .ds-type-row span { font-size: 0.75rem; color: var(--muted-foreground); text-transform: uppercase; letter-spacing: 0.05em; }
+
+    .ds-scale { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .ds-scale > div { background: var(--primary); color: var(--primary-foreground); border-radius: 0.375rem; padding: 0.5rem; font-size: 0.75rem; display: flex; align-items: center; justify-content: center; }
+
+    .ds-radius-row, .ds-shadow-row { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; }
+    .ds-radius-row > div, .ds-shadow-row > div { width: 100px; height: 100px; background: var(--card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: var(--muted-foreground); }
+
+    .ds-showcase-hero {
+      padding: 6rem 1rem;
+      text-align: center;
+      background: radial-gradient(circle at top, var(--secondary), var(--background));
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .ds-showcase-hero h1 { font-size: 3rem; font-weight: 700; line-height: 1.1; max-width: 800px; }
+    .ds-showcase-hero p { font-size: 1.25rem; color: var(--muted-foreground); max-width: 600px; }
+    .ds-showcase-hero__stats { display: flex; gap: 2rem; margin-top: 2rem; }
+    .ds-showcase-hero__stats div { text-align: center; }
+    .ds-showcase-hero__stats strong { display: block; font-size: 1.5rem; }
+    .ds-showcase-hero__stats span { font-size: 0.875rem; color: var(--muted-foreground); }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a href="#" class="brand">Design System</a>
+      <nav class="nav">
+        <a href="#colors" class="nav-link">Colors</a>
+        <a href="#typography" class="nav-link">Typography</a>
+        <a href="#components" class="nav-link">Components</a>
+        <a href="#sections" class="nav-link">Sections</a>
+      </nav>
+      <button class="btn btn-outline" aria-label="Toggle theme">Toggle Theme</button>
+    </div>
+  </header>
+
+  <section class="ds-showcase-hero" id="top">
+    <span class="badge">v1.0.0</span>
+    <h1>The System Design Kit</h1>
+    <p>A comprehensive design system built with standard CSS variables and utility classes for rapid UI development.</p>
+    <div class="flex gap-4">
+      <a href="#components" class="btn btn-primary btn-lg">Explore Components</a>
+      <a href="#sections" class="btn btn-outline btn-lg">View Sections</a>
+    </div>
+    <div class="ds-showcase-hero__stats">
+      <div><strong>12+</strong><span>Components</span></div>
+      <div><strong>50+</strong><span>Utilities</span></div>
+      <div><strong>6</strong><span>Sections</span></div>
+    </div>
+  </section>
+
+  <main class="container ds-page">
+    
+    <!-- Foundations -->
+    <section class="ds-block" id="colors">
+      <h2>Colors</h2>
+      <p class="ds-note">Semantic color tokens defined in <code>:root</code> and overridden in <code>.dark</code>.</p>
+      <div class="ds-swatches">
+        <div class="ds-swatch"><div class="ds-swatch__color" style="background: var(--background); border: 1px solid var(--border)"></div><div class="ds-swatch__label">Background</div></div>
+        <div class="ds-swatch"><div class="ds-swatch__color" style="background: var(--foreground)"></div><div class="ds-swatch__label">Foreground</div></div>
+        <div class="ds-swatch"><div class="ds-swatch__color" style="background: var(--card)"></div><div class="ds-swatch__label">Card</div></div>
+        <div class="ds-swatch"><div class="ds-swatch__color" style="background: var(--primary)"></div><div class="ds-swatch__label">Primary</div></div>
+        <div class="ds-swatch"><div class="ds-swatch__color" style="background: var(--secondary)"></div><div class="ds-swatch__label">Secondary</div></div>
+        <div class="ds-swatch"><div class="ds-swatch__color" style="background: var(--muted)"></div><div class="ds-swatch__label">Muted</div></div>
+        <div class="ds-swatch"><div class="ds-swatch__color" style="background: var(--accent)"></div><div class="ds-swatch__label">Accent</div></div>
+        <div class="ds-swatch"><div class="ds-swatch__color" style="background: var(--destructive)"></div><div class="ds-swatch__label">Destructive</div></div>
+      </div>
+    </section>
+
+    <section class="ds-block" id="typography">
+      <h2>Typography</h2>
+      <p class="ds-note">Type scale, weights, and line heights.</p>
+      <div class="flex flex-col gap-6">
+        <div class="ds-type-row">
+          <span>Text 5xl / Bold / Tight</span>
+          <h1 class="text-5xl font-bold tracking-tight leading-tight">The quick brown fox</h1>
+        </div>
+        <div class="ds-type-row">
+          <span>Text 4xl / Bold / Tight</span>
+          <h2 class="text-4xl font-bold tracking-tight leading-tight">The quick brown fox</h2>
+        </div>
+        <div class="ds-type-row">
+          <span>Text 3xl / Bold / Snug</span>
+          <h3 class="text-3xl font-bold tracking-tight leading-snug">The quick brown fox</h3>
+        </div>
+        <div class="ds-type-row">
+          <span>Text 2xl / Semibold / Snug</span>
+          <h4 class="text-2xl font-semibold leading-snug">The quick brown fox</h4>
+        </div>
+        <div class="ds-type-row">
+          <span>Text base / Normal / Normal</span>
+          <p class="text-base font-normal leading-normal">The quick brown fox jumps over the lazy dog.</p>
+        </div>
+        <div class="ds-type-row">
+          <span>Text sm / Medium / Normal</span>
+          <p class="text-sm font-medium leading-normal">The quick brown fox jumps over the lazy dog.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="ds-block" id="spacing">
+      <h2>Spacing &amp; Radius</h2>
+      <p class="ds-note">Core spacing scale and border radius tokens.</p>
+      <h3 class="ds-subhead">Spacing Scale</h3>
+      <div class="ds-scale">
+        <div style="width: 0.5rem; height: 0.5rem;" title="space-2">2</div>
+        <div style="width: 1rem; height: 1rem;" title="space-4">4</div>
+        <div style="width: 1.5rem; height: 1.5rem;" title="space-6">6</div>
+        <div style="width: 2rem; height: 2rem;" title="space-8">8</div>
+        <div style="width: 3rem; height: 3rem;" title="space-12">12</div>
+        <div style="width: 4rem; height: 4rem;" title="space-16">16</div>
+        <div style="width: 6rem; height: 6rem;" title="space-24">24</div>
+      </div>
+      
+      <h3 class="ds-subhead">Border Radius</h3>
+      <div class="ds-radius-row">
+        <div class="rounded-sm">sm</div>
+        <div class="rounded-md">md</div>
+        <div class="rounded-lg">lg</div>
+        <div class="rounded-xl">xl</div>
+        <div class="rounded-full">full</div>
+      </div>
+
+      <h3 class="ds-subhead">Shadows</h3>
+      <div class="ds-shadow-row">
+        <div class="shadow-sm">sm</div>
+        <div class="shadow-md">md</div>
+        <div class="shadow-lg">lg</div>
+      </div>
+    </section>
+
+    <section class="ds-block" id="rich-text">
+      <h2>Rich Text</h2>
+      <p class="ds-note">Use the <code>.prose</code> class to style CMS-rendered HTML or long-form article content.</p>
+      <div class="prose">
+        <h2>Understanding Design Systems</h2>
+        <p>A design system is a collection of reusable components, guided by clear standards, that can be assembled together to build any number of applications.</p>
+        <p>It enables teams to build better products faster by making design reusable. Reusability reduces redundancy, <a href="#">which saves time</a> and effort.</p>
+        <ul>
+          <li>Consistent visual language</li>
+          <li>Faster development cycles</li>
+          <li>Easier maintenance</li>
+        </ul>
+        <h3>Key Principles</h3>
+        <p>Focus on clarity, consistency, and scalability. Avoid premature optimization of components before understanding the core use cases.</p>
+        <blockquote>Good design is as little design as possible.</blockquote>
+        <p>To implement a button, you can use <code>&lt;button class="btn btn-primary"&gt;</code>.</p>
+      </div>
+    </section>
+
+    <!-- Components -->
+    <section class="ds-block" id="components">
+      <h2>Components</h2>
+
+      <h3 class="ds-subhead">Buttons</h3>
+      <div class="ds-specimens" data-klar-ds-elements="primary-buttons" data-klar-ds-label="Primary Buttons">
+        <a href="#" class="btn btn-primary" data-klar-ds-label="Primary link">Primary Link</a>
+        <button class="btn btn-primary" data-klar-ds-label="Primary button">Primary Button</button>
+        <a href="#" class="btn btn-primary btn-lg" data-klar-ds-label="Large link">Large Link</a>
+        <button class="btn btn-primary btn-lg" data-klar-ds-label="Large button">Large Button</button>
+      </div>
+      <div class="ds-specimens mt-4" data-klar-ds-elements="outline-buttons" data-klar-ds-label="Outline Buttons">
+        <a href="#" class="btn btn-outline" data-klar-ds-label="Outline link">Outline Link</a>
+        <button class="btn btn-outline" data-klar-ds-label="Outline button">Outline Button</button>
+      </div>
+      <div class="ds-specimens mt-4" data-klar-ds-elements="ghost-buttons" data-klar-ds-label="Ghost Buttons">
+        <a href="#" class="btn btn-ghost" data-klar-ds-label="Ghost link">Ghost Link</a>
+        <button class="btn btn-ghost" data-klar-ds-label="Ghost button">Ghost Button</button>
+      </div>
+
+      <h3 class="ds-subhead">Badges</h3>
+      <div class="ds-specimens" data-klar-ds-elements="badges" data-klar-ds-label="Badges">
+        <span class="badge" data-klar-ds-label="Default">Default</span>
+        <span class="badge" data-klar-ds-label="Primary" style="background: var(--primary); color: var(--primary-foreground);">Primary</span>
+      </div>
+
+      <h3 class="ds-subhead">Cards</h3>
+      <div class="ds-specimens ds-specimens--grid" data-klar-ds-elements="cards" data-klar-ds-label="Cards">
+        <div class="card" data-klar-ds-label="Basic card">
+          <div class="card__header">
+            <h4 class="card__title">Card Title</h4>
+          </div>
+          <div class="card__body">
+            <p class="text-sm text-muted-foreground">This is the body of the card where content goes.</p>
+          </div>
+        </div>
+        <div class="card" data-klar-ds-label="Card with footer">
+          <div class="card__header">
+            <h4 class="card__title">Settings</h4>
+          </div>
+          <div class="card__body">
+            <p class="text-sm text-muted-foreground">Manage your account preferences.</p>
+          </div>
+          <div class="card__footer flex justify-end">
+            <button class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="ds-subhead">Forms</h3>
+      <div class="ds-specimens ds-specimens--grid" data-klar-ds-elements="form-controls" data-klar-ds-label="Form Controls">
+        <div data-klar-ds-label="Input">
+          <label class="label" for="name">Name</label>
+          <input class="input" type="text" id="name" placeholder="John Doe">
+        </div>
+        <div data-klar-ds-label="Textarea">
+          <label class="label" for="bio">Bio</label>
+          <textarea class="textarea" id="bio" placeholder="Tell us about yourself"></textarea>
+        </div>
+        <div data-klar-ds-label="Select">
+          <label class="label" for="role">Role</label>
+          <select class="select" id="role">
+            <option>Admin</option>
+            <option>User</option>
+          </select>
+        </div>
+      </div>
+
+      <h3 class="ds-subhead">Container</h3>
+      <div class="ds-specimens" data-klar-ds-elements="containers" data-klar-ds-label="Container">
+        <div class="container border p-4 text-center" data-klar-ds-label="Default">Container Default</div>
+        <div class="container-narrow border p-4 text-center" data-klar-ds-label="Narrow">Container Narrow</div>
+        <div class="container-wide border p-4 text-center" data-klar-ds-label="Wide">Container Wide</div>
+      </div>
+
+      <h3 class="ds-subhead">Grid</h3>
+      <div class="ds-specimens ds-specimens--grid" data-klar-ds-elements="grids" data-klar-ds-label="Grid">
+        <div class="grid grid-cols-2 gap-2" data-klar-ds-label="2 columns">
+          <div class="bg-secondary p-4 text-center text-sm">1</div>
+          <div class="bg-secondary p-4 text-center text-sm">2</div>
+        </div>
+        <div class="grid grid-cols-3 gap-2" data-klar-ds-label="3 columns">
+          <div class="bg-secondary p-4 text-center text-sm">1</div>
+          <div class="bg-secondary p-4 text-center text-sm">2</div>
+          <div class="bg-secondary p-4 text-center text-sm">3</div>
+        </div>
+        <div class="grid grid-cols-4 gap-2" data-klar-ds-label="4 columns">
+          <div class="bg-secondary p-4 text-center text-sm">1</div>
+          <div class="bg-secondary p-4 text-center text-sm">2</div>
+          <div class="bg-secondary p-4 text-center text-sm">3</div>
+          <div class="bg-secondary p-4 text-center text-sm">4</div>
+        </div>
+      </div>
+
+      <h3 class="ds-subhead">Container and Grid</h3>
+      <div class="ds-specimens ds-specimens--stack" data-klar-ds-elements="containers-and-grids" data-klar-ds-label="Container and Grid">
+        <div class="container grid grid-cols-2 gap-4" data-klar-ds-label="Default · 2 cols">
+          <div class="bg-secondary p-4 text-center text-sm">Item 1</div>
+          <div class="bg-secondary p-4 text-center text-sm">Item 2</div>
+        </div>
+        <div class="container grid grid-cols-3 gap-4" data-klar-ds-label="Default · 3 cols">
+          <div class="bg-secondary p-4 text-center text-sm">Item 1</div>
+          <div class="bg-secondary p-4 text-center text-sm">Item 2</div>
+          <div class="bg-secondary p-4 text-center text-sm">Item 3</div>
+        </div>
+        <div class="container-narrow grid grid-cols-2 gap-4" data-klar-ds-label="Narrow · 2 cols">
+          <div class="bg-secondary p-4 text-center text-sm">Item 1</div>
+          <div class="bg-secondary p-4 text-center text-sm">Item 2</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sections -->
+    <section class="ds-block" id="sections">
+      <h2>Sections</h2>
+      <p class="ds-note">Template-ready page sections. These can be inserted directly into pages.</p>
+      
+      <div class="ds-specimens ds-specimens--stack" data-klar-ds-elements="Sections">
+        
+        <header class="site-header" data-klar-ds-label="Header">
+          <div class="container site-header__inner">
+            <a href="#" class="brand">Brand</a>
+            <nav class="nav">
+              <a href="#" class="nav-link">Home</a>
+              <a href="#" class="nav-link">About</a>
+              <a href="#" class="nav-link">Contact</a>
+            </nav>
+            <a href="#" class="btn btn-primary">Get Started</a>
+          </div>
+        </header>
+
+        <section data-klar-ds-label="Hero">
+          <div class="container">
+            <div class="hero">
+              <span class="badge">New Feature</span>
+              <h1 class="text-5xl font-bold tracking-tight">Build better interfaces</h1>
+              <p class="text-lg text-muted-foreground max-w-md">A powerful design system to help you build beautiful, responsive websites in minutes.</p>
+              <div class="flex gap-4">
+                <a href="#" class="btn btn-primary btn-lg">Get Started</a>
+                <a href="#" class="btn btn-outline btn-lg">Learn More</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section data-klar-ds-label="Text content">
+          <div class="container">
+            <div class="prose">
+              <h2>Our Mission</h2>
+              <p>We believe that great design should be accessible to everyone. Our platform provides the tools you need to create stunning websites without starting from scratch.</p>
+              <p>By leveraging a systematic approach to design, we ensure consistency and quality across all your projects.</p>
+              <h3>Why Choose Us?</h3>
+              <ul>
+                <li>Rapid development and deployment</li>
+                <li>Consistent design language</li>
+                <li>Fully accessible components</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section data-klar-ds-label="Post grid">
+          <div class="container">
+            <h2 class="text-3xl font-bold mb-8 text-center">Latest Articles</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="card">
+                <div class="card__header"><h4 class="card__title">Article 1</h4></div>
+                <div class="card__body"><p class="text-sm text-muted-foreground">A brief description of the first article.</p></div>
+              </div>
+              <div class="card">
+                <div class="card__header"><h4 class="card__title">Article 2</h4></div>
+                <div class="card__body"><p class="text-sm text-muted-foreground">A brief description of the second article.</p></div>
+              </div>
+              <div class="card">
+                <div class="card__header"><h4 class="card__title">Article 3</h4></div>
+                <div class="card__body"><p class="text-sm text-muted-foreground">A brief description of the third article.</p></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section data-klar-ds-label="Newsletter CTA">
+          <div class="container">
+            <div class="card text-center p-8">
+              <h2 class="text-3xl font-bold mb-4">Subscribe to our Newsletter</h2>
+              <p class="text-muted-foreground mb-6">Get the latest updates directly to your inbox.</p>
+              <form class="flex max-w-md mx-auto gap-4">
+                <input type="email" class="input" placeholder="Enter your email">
+                <button class="btn btn-primary">Subscribe</button>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <section data-klar-ds-label="Contact">
+          <div class="container">
+            <div class="grid md:grid-cols-2 gap-12">
+              <div>
+                <h2 class="text-3xl font-bold mb-4">Get in touch</h2>
+                <p class="text-muted-foreground mb-6">Fill out the form and our team will get back to you within 24 hours.</p>
+              </div>
+              <form class="flex flex-col gap-4">
+                <div>
+                  <label class="label">Name</label>
+                  <input class="input" type="text" placeholder="Your name">
+                </div>
+                <div>
+                  <label class="label">Email</label>
+                  <input class="input" type="email" placeholder="Your email">
+                </div>
+                <div>
+                  <label class="label">Message</label>
+                  <textarea class="textarea" placeholder="Your message"></textarea>
+                </div>
+                <button class="btn btn-primary">Send Message</button>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <footer class="site-footer" data-klar-ds-label="Footer">
+          <div class="container">
+            <div class="site-footer__grid">
+              <div>
+                <div class="brand mb-4">Brand</div>
+                <p class="text-sm text-muted-footer">Building the future of design systems.</p>
+              </div>
+              <div class="flex flex-col gap-2">
+                <h4 class="font-semibold mb-2">Product</h4>
+                <a href="#" class="footer-link">Features</a>
+                <a href="#" class="footer-link">Pricing</a>
+              </div>
+              <div class="flex flex-col gap-2">
+                <h4 class="font-semibold mb-2">Company</h4>
+                <a href="#" class="footer-link">About</a>
+                <a href="#" class="footer-link">Contact</a>
+              </div>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container text-center text-sm text-muted-foreground">
+      Design System Documentation
+    </div>
+  </footer>
+
+  <!-- Foundation utility manifest for the Klar editor.
+       Every value references a class that exists in style.css. -->
+  <script type="application/json" data-klar-ds>
+  {
+    "classes": {
+      "Utilities": [
+        { "label": "Background", "value": "bg-background" },
+        { "label": "Card", "value": "bg-card" },
+        { "label": "Primary", "value": "bg-primary" },
+        { "label": "Secondary", "value": "bg-secondary" },
+        { "label": "Muted", "value": "bg-muted" },
+        { "label": "Transparent", "value": "bg-transparent" },
+        { "label": "Body", "value": "text-foreground" },
+        { "label": "Primary", "value": "text-primary" },
+        { "label": "On primary", "value": "text-primary-foreground" },
+        { "label": "Muted", "value": "text-muted-foreground" },
+        { "label": "Destructive", "value": "text-destructive" },
+        { "label": "Block", "value": "block" },
+        { "label": "Flex", "value": "flex" },
+        { "label": "Inline Flex", "value": "inline-flex" },
+        { "label": "Grid", "value": "grid" },
+        { "label": "Hidden", "value": "hidden" },
+        { "label": "Row", "value": "flex-row" },
+        { "label": "Column", "value": "flex-col" },
+        { "label": "Wrap", "value": "flex-wrap" },
+        { "label": "Items center", "value": "items-center" },
+        { "label": "Items start", "value": "items-start" },
+        { "label": "Items end", "value": "items-end" },
+        { "label": "Justify center", "value": "justify-center" },
+        { "label": "Justify between", "value": "justify-between" },
+        { "label": "Justify start", "value": "justify-start" },
+        { "label": "Justify end", "value": "justify-end" },
+        { "label": "Cols 1", "value": "grid-cols-1" },
+        { "label": "Cols 2", "value": "grid-cols-2" },
+        { "label": "Cols 3", "value": "grid-cols-3" },
+        { "label": "Cols 4", "value": "grid-cols-4" },
+        { "label": "Span 2", "value": "col-span-2" },
+        { "label": "Gap 2", "value": "gap-2" },
+        { "label": "Gap 4", "value": "gap-4" },
+        { "label": "Gap 6", "value": "gap-6" },
+        { "label": "Gap 8", "value": "gap-8" },
+        { "label": "M 0", "value": "m-0" },
+        { "label": "MX Auto", "value": "mx-auto" },
+        { "label": "MT 2", "value": "mt-2" },
+        { "label": "MT 4", "value": "mt-4" },
+        { "label": "MT 6", "value": "mt-6" },
+        { "label": "MT 8", "value": "mt-8" },
+        { "label": "MB 2", "value": "mb-2" },
+        { "label": "MB 4", "value": "mb-4" },
+        { "label": "MB 6", "value": "mb-6" },
+        { "label": "MB 8", "value": "mb-8" },
+        { "label": "MB 12", "value": "mb-12" },
+        { "label": "P 0", "value": "p-0" },
+        { "label": "P 4", "value": "p-4" },
+        { "label": "P 6", "value": "p-6" },
+        { "label": "P 8", "value": "p-8" },
+        { "label": "PY 4", "value": "py-4" },
+        { "label": "PY 8", "value": "py-8" },
+        { "label": "PY 12", "value": "py-12" },
+        { "label": "PY 16", "value": "py-16" },
+        { "label": "PX 4", "value": "px-4" },
+        { "label": "PX 6", "value": "px-6" },
+        { "label": "W Full", "value": "w-full" },
+        { "label": "W Auto", "value": "w-auto" },
+        { "label": "Max W SM", "value": "max-w-sm" },
+        { "label": "Max W MD", "value": "max-w-md" },
+        { "label": "Max W LG", "value": "max-w-lg" },
+        { "label": "Max W 4XL", "value": "max-w-4xl" },
+        { "label": "Max W 6XL", "value": "max-w-6xl" },
+        { "label": "Max W Full", "value": "max-w-full" },
+        { "label": "Min H Screen", "value": "min-h-screen" },
+        { "label": "Left", "value": "text-left" },
+        { "label": "Center", "value": "text-center" },
+        { "label": "Right", "value": "text-right" },
+        { "label": "Uppercase", "value": "uppercase" },
+        { "label": "Lowercase", "value": "lowercase" },
+        { "label": "Truncate", "value": "truncate" },
+        { "label": "XS", "value": "text-xs" },
+        { "label": "SM", "value": "text-sm" },
+        { "label": "Base", "value": "text-base" },
+        { "label": "LG", "value": "text-lg" },
+        { "label": "XL", "value": "text-xl" },
+        { "label": "2XL", "value": "text-2xl" },
+        { "label": "3XL", "value": "text-3xl" },
+        { "label": "4XL", "value": "text-4xl" },
+        { "label": "5XL", "value": "text-5xl" },
+        { "label": "Normal", "value": "font-normal" },
+        { "label": "Medium", "value": "font-medium" },
+        { "label": "Semibold", "value": "font-semibold" },
+        { "label": "Bold", "value": "font-bold" },
+        { "label": "Sans", "value": "font-sans" },
+        { "label": "Serif", "value": "font-serif" },
+        { "label": "Mono", "value": "font-mono" },
+        { "label": "None", "value": "leading-none" },
+        { "label": "Tight", "value": "leading-tight" },
+        { "label": "Snug", "value": "leading-snug" },
+        { "label": "Normal", "value": "leading-normal" },
+        { "label": "Relaxed", "value": "leading-relaxed" },
+        { "label": "Tight", "value": "tracking-tight" },
+        { "label": "Normal", "value": "tracking-normal" },
+        { "label": "Wide", "value": "tracking-wide" },
+        { "label": "Border", "value": "border" },
+        { "label": "Border 0", "value": "border-0" },
+        { "label": "Border B", "value": "border-b" },
+        { "label": "Border T", "value": "border-t" },
+        { "label": "Border Muted", "value": "border-muted" },
+        { "label": "SM", "value": "rounded-sm" },
+        { "label": "MD", "value": "rounded-md" },
+        { "label": "LG", "value": "rounded-lg" },
+        { "label": "XL", "value": "rounded-xl" },
+        { "label": "Full", "value": "rounded-full" },
+        { "label": "SM", "value": "shadow-sm" },
+        { "label": "MD", "value": "shadow-md" },
+        { "label": "LG", "value": "shadow-lg" },
+        { "label": "50", "value": "opacity-50" },
+        { "label": "100", "value": "opacity-100" },
+        { "label": "Transition", "value": "transition" },
+        { "label": "Relative", "value": "relative" },
+        { "label": "Absolute", "value": "absolute" },
+        { "label": "Fixed", "value": "fixed" },
+        { "label": "Sticky", "value": "sticky" },
+        { "label": "Top 0", "value": "top-0" },
+        { "label": "Left 0", "value": "left-0" },
+        { "label": "Right 0", "value": "right-0" },
+        { "label": "Bottom 0", "value": "bottom-0" },
+        { "label": "Pointer", "value": "cursor-pointer" },
+        { "label": "Cover", "value": "object-cover" },
+        { "label": "Video", "value": "aspect-video" },
+        { "label": "Hidden", "value": "overflow-hidden" },
+        { "label": "SR Only", "value": "sr-only" },
+        { "label": "Prose", "value": "prose" },
+        { "label": "Container", "value": "container" },
+        { "label": "Container Narrow", "value": "container-narrow" },
+        { "label": "Container Wide", "value": "container-wide" },
+        
+        { "label": "Block", "value": "md:block" },
+        { "label": "Flex", "value": "md:flex" },
+        { "label": "Hidden", "value": "md:hidden" },
+        { "label": "Grid", "value": "md:grid" },
+        { "label": "Cols 2", "value": "md:grid-cols-2" },
+        { "label": "Cols 3", "value": "md:grid-cols-3" },
+        { "label": "Row", "value": "md:flex-row" },
+        { "label": "Left", "value": "md:text-left" },
+        { "label": "4XL", "value": "md:text-4xl" },
+        { "label": "16", "value": "md:py-16" },
+        { "label": "6", "value": "md:px-6" },
+        
+        { "label": "Flex", "value": "lg:flex" },
+        { "label": "Grid", "value": "lg:grid" },
+        { "label": "Hidden", "value": "lg:hidden" },
+        { "label": "Cols 2", "value": "lg:grid-cols-2" },
+        { "label": "Cols 3", "value": "lg:grid-cols-3" },
+        { "label": "Cols 4", "value": "lg:grid-cols-4" },
+        { "label": "5XL", "value": "lg:text-5xl" },
+        { "label": "24", "value": "lg:py-24" },
+        { "label": "4XL", "value": "lg:max-w-4xl" }
+      ],
+      "Typography": [
+        { "label": "Display", "value": "text-5xl font-bold tracking-tight leading-tight" },
+        { "label": "Heading 1", "value": "text-4xl font-bold tracking-tight leading-tight" },
+        { "label": "Heading 2", "value": "text-3xl font-bold tracking-tight leading-snug" },
+        { "label": "Heading 3", "value": "text-2xl font-semibold leading-snug" },
+        { "label": "Heading 4", "value": "text-xl font-semibold leading-snug" },
+        { "label": "Lead", "value": "text-lg font-normal leading-relaxed" },
+        { "label": "Body", "value": "text-base font-normal leading-normal" },
+        { "label": "Small", "value": "text-sm font-medium leading-normal" },
+        { "label": "Meta", "value": "text-xs font-medium uppercase tracking-wide" }
+      ],
+      "Grid": [
+        { "label": "2 columns", "value": "grid grid-cols-2" },
+        { "label": "3 columns", "value": "grid grid-cols-3" },
+        { "label": "4 columns", "value": "grid grid-cols-4" }
+      ],
+      "Container and Grid": [
+        { "label": "Default · 2 cols", "value": "container grid grid-cols-2" },
+        { "label": "Default · 3 cols", "value": "container grid grid-cols-3" },
+        { "label": "Default · 4 cols", "value": "container grid grid-cols-4" },
+        { "label": "Narrow · 2 cols", "value": "container-narrow grid grid-cols-2" },
+        { "label": "Narrow · 3 cols", "value": "container-narrow grid grid-cols-3" },
+        { "label": "Narrow · 4 cols", "value": "container-narrow grid grid-cols-4" },
+        { "label": "Wide · 2 cols", "value": "container-wide grid grid-cols-2" },
+        { "label": "Wide · 3 cols", "value": "container-wide grid grid-cols-3" },
+        { "label": "Wide · 4 cols", "value": "container-wide grid grid-cols-4" }
+      ]
+    }
+  }
+  </script>
+
+  <script>
+    document.querySelector('[aria-label="Toggle theme"]').addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+    });
+  </script>
+</body>
+</html>
