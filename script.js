@@ -144,7 +144,7 @@ document.querySelector('.vkn-burger').onclick = function(e) {
 }
 
 // Theme toggle — applies .dark on <html>, persists in localStorage
-(function () {
+function setThemeToggle() {
   const STORAGE_KEY = "theme";
   const root = document.documentElement;
 
@@ -162,4 +162,5 @@ document.querySelector('.vkn-burger').onclick = function(e) {
     root.classList.toggle("dark");
     localStorage.setItem(STORAGE_KEY, root.classList.contains("dark") ? "dark" : "light");
   });
-})();
+};
+setThemeToggle();
