@@ -113,7 +113,7 @@ a {
 
 /* Layout primitives */
 .container {
-  width: min(var(--content-width), 92vw);
+  max-width: min(var(--content-width), 92vw);
   margin: 0 auto;
 }
 
