@@ -128,6 +128,7 @@ try {
 
 // Active link highlighting
 function setActive() {
+  return;
   document.querySelectorAll("a").forEach((a) => {
     a.classList.toggle("active", a.pathname === location.pathname);
   });
