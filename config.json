@@ -2,6 +2,11 @@
   "pageTypes": [],
   "pages": [
     {
+      "name": "index.html",
+      "editableElements": "body,\nh1:attr(id, class[Eyebrow:eyebrow], style[margin:10px,padding]),\np:style(background-image),\np:config(type:string, enableEnter: true),",
+      "sharedSections": ".site-header, .site-footer"
+    },
+    {
       "name": "page-blank.html",
       "editableElements": "main:htmlBlocks(styling:[\n  { selector: 'section, div, h1, h2, h3, p, button, a, span, time',\n    collection: 'classes',\n    categories: 'layout flexbox grid spacing typography colors-backgrounds borders effects Transforms transitions-animation  lists tables miscellaneous' },\n    { selector: 'img',                 collection: 'classes', categories: 'radius effects' },\n    { selector: 'root',                 collection: 'classes', categories: 'background-color' }\n])"
     }
