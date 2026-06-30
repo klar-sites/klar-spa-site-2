@@ -142,3 +142,24 @@ document.querySelector('.vkn-burger').onclick = function(e) {
     document.querySelector('.vkn-nav').classList.add('show');  
   }
 }
+
+// Theme toggle — applies .dark on <html>, persists in localStorage
+(function () {
+  const STORAGE_KEY = "theme";
+  const root = document.documentElement;
+
+  // Initialise from storage or system preference
+  const stored = localStorage.getItem(STORAGE_KEY);
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  if (stored === "dark" || (!stored && prefersDark)) {
+    root.classList.add("dark");
+  }
+
+  // Wire up toggle buttons (works for any page via event delegation)
+  document.addEventListener("click", (e) => {
+    const toggle = e.target.closest(".theme-toggle");
+    if (!toggle) return;
+    root.classList.toggle("dark");
+    localStorage.setItem(STORAGE_KEY, root.classList.contains("dark") ? "dark" : "light");
+  });
+})();
